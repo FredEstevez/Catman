@@ -1,9 +1,34 @@
+import java.io.IOException;
 
-public class main {
+import javax.swing.JFrame;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+
+public class main extends JFrame{
+
+	public main(){
+		
+		
+		add (new Tablero());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(860,700);
+		setLocationRelativeTo(null);
+		setTitle ("----- CATMAN UEM -----");
+		setVisible(true);
+		
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.print("Rama Sofia");
+		new main();
+
+       libreriaAudio audio = new libreriaAudio();
+       audio.musica();
+  
+
 	}
 
 }
