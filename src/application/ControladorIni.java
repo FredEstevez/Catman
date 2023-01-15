@@ -17,10 +17,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ControladorIni {
-
+	libreriaAudio reproduce1 = new libreriaAudio();
+    
     @FXML
     private Label TextCatMan;
-
+    
     @FXML
     private Label TextEquipo;
 
@@ -48,6 +49,7 @@ public class ControladorIni {
     void EventoJugar(ActionEvent event) {
     	@SuppressWarnings("unused")
 		String texto = TextJugador.getText();	
+    	reproduce1.SonidoJugar();
     	
     		try {
     			FXMLLoader loader = new FXMLLoader(getClass().getResource("pacman.fxml"));

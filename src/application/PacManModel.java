@@ -414,12 +414,14 @@ public class PacManModel {
      */
     public void step(Direction direction) {
         this.movePacman(direction);
+   	 libreriaAudio reproduce = new libreriaAudio();
         //if PacMan is on a small dot, delete small dot
         CellValue pacmanLocationCellValue = grid[(int) pacmanLocation.getX()][(int) pacmanLocation.getY()];
         if (pacmanLocationCellValue == CellValue.SMALLDOT) {
             grid[(int) pacmanLocation.getX()][(int) pacmanLocation.getY()] = CellValue.EMPTY;
             dotCount--;
             score += 10;
+            reproduce.SonidoJugar();
         }
         //if PacMan is on a big dot, delete big dot and change game state to ghost-eating mode and initialize the counter
         if (pacmanLocationCellValue == CellValue.BIGDOT) {
@@ -427,6 +429,7 @@ public class PacManModel {
             dotCount--;
             score += 50;
             ghostEatingMode = true;
+            reproduce.SonidoSuperQueso();
             Controller.setGhostEatingModeCounter();
         }
         //send ghost back to ghosthome if PacMan is on a ghost in ghost-eating mode
@@ -434,24 +437,28 @@ public class PacManModel {
             if (pacmanLocation.equals(ghost1Location)) {
                 sendGhost1Home();
                 score += 100;
+               reproduce.SonidoGatoAzul();
             }
             if (pacmanLocation.equals(ghost2Location)) {
                 sendGhost2Home();
                 score += 100;
+                reproduce.SonidoGatoAzul();
             }
         }
-        //game over if PacMan is eaten by a ghost
+        //Game Over, el raton es devorado por un gato
         else {
             if (pacmanLocation.equals(ghost1Location)) {
                 gameOver = true;
                 pacmanVelocity = new Point2D(0,0);
+               
             }
             if (pacmanLocation.equals(ghost2Location)) {
                 gameOver = true;
                 pacmanVelocity = new Point2D(0,0);
+               
             }
         }
-        //move ghosts and checks again if ghosts or PacMan are eaten (repeating these checks helps account for even/odd numbers of squares between ghosts and PacMan)
+        //mover fantasmas y comprobar de nuevo si se comen fantasmas o PacMan (repetir estas comprobaciones ayuda a tener en cuenta los números pares/impares de cuadrados entre fantasmas y PacMan)
         this.moveGhosts();
         if (ghostEatingMode) {
             if (pacmanLocation.equals(ghost1Location)) {
@@ -480,11 +487,9 @@ public class PacManModel {
         }
     }
 
-    /**
-     * Connects each direction to Point2D velocity vectors (Left = (-1,0), Right = (1,0), Up = (0,-1), Down = (0,1))
-     * @param direction
-     * @return Point2D velocity vector
-     */
+
+    // Conecta cada dirección a vectores de velocidad Point2D (Left = (-1,0), Right = (1,0), Up = (0,-1), Down = (0,1))
+
     public Point2D changeVelocity(Direction direction){
         if(direction == Direction.LEFT){
             return new Point2D(0,-1);

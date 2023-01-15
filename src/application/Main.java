@@ -1,15 +1,15 @@
 // Desarrollado por PacMan Company
 
 package application;	
-//import audio.libreriaAudio;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	 libreriaAudio reproduce = new libreriaAudio();
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -25,6 +25,8 @@ public class Main extends Application {
 			
 			primaryStage.show();
 			
+			reproduce.SonidoInici();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -32,10 +34,8 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-	
-	     //  libreriaAudio audio = new libreriaAudio();
-	    //  audio.musica();
 		
+	 		
 		
 	}
 }
