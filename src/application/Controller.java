@@ -63,6 +63,7 @@ public class Controller implements EventHandler<KeyEvent> {
      * @param direction the most recently inputted direction for PacMan to move in
      */
     private void update(PacManModel.Direction direction) {
+    	 libreriaAudio reproduce = new libreriaAudio();
         this.pacManModel.step(direction);
         this.pacManView.update(pacManModel);
        // this.scoreLabel.setText(String.format("Score: %d", this.pacManModel.getScore()));  
@@ -70,7 +71,8 @@ public class Controller implements EventHandler<KeyEvent> {
         this.scoreLabel.setText(String.format("Puntuación: %d", this.pacManModel.getScore()));  	//by Pacman Company
         this.levelLabel.setText(String.format("Nivel: %d", this.pacManModel.getLevel()));  			//by Pacman Company
         if (PacManModel.isGameOver()) {
-            this.gameOverLabel.setText(String.format("GAME OVER"));
+        	reproduce.SonidoMuere();
+        	this.gameOverLabel.setText(String.format("GAME OVER"));
             pause();
         }
         if (PacManModel.isYouWon()) {

@@ -9,10 +9,10 @@ El cual trata de una nueva version del conocido Pacman, pero esta vez sera de Ga
 Desarrollado en JAVAFX
 
 Integrantes
-Sofía Corral Caballero
-Fred José Estévez Contreras
-José Ángel de la Peña Toledo
-Johnny Leonardo Roca Mendoza
+Sofía Corral Caballero, 
+Fred José Estévez Contreras, 
+José Ángel de la Peña Toledo, 
+Johnny Leonardo Roca Mendoza.
 
 Profesor
 Hecto Barrio Crespo
