@@ -20,6 +20,7 @@ public class PacManModel {
     private int score;
     private int level;
     private int dotCount;
+    private int LiveCount;//vidas
     private static boolean gameOver;
     private static boolean youWon;
     private static boolean ghostEatingMode;
@@ -31,6 +32,7 @@ public class PacManModel {
     private Point2D ghost2Velocity;
     private static Direction lastDirection;
     private static Direction currentDirection;
+
 
     /**
      * Start a new game upon initializion
@@ -143,9 +145,26 @@ public class PacManModel {
         columnCount = 0;
         this.score = 0;
         this.level = 1;
+        this.LiveCount = 3;
         this.initializeLevel(Controller.getLevelFile(0));
-    }
 
+    }
+    
+    // By Pacman Company -- Reinicio de partida tras perder una vida
+ 
+    public void startGame() {
+        PacManModel.gameOver = false;
+        PacManModel.youWon = false;
+        PacManModel.ghostEatingMode = false;
+        dotCount = 0;
+        rowCount = 0;
+        columnCount = 0;
+        this.score = 0;
+        this.level = 1;
+        this.initializeLevel(Controller.getLevelFile(0));
+
+    }
+    // By Pacman Company -- Reinicio de partida tras perder una vida --fin
     /** Initialize the level map for the next level
      *
      */
@@ -448,13 +467,27 @@ public class PacManModel {
         //Game Over, el raton es devorado por un gato
         else {
             if (pacmanLocation.equals(ghost1Location)) {
-                gameOver = true;
+            	LiveCount --;
+            	if (LiveCount == 0 ) {
+            		gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+            	}
+            	else {
+            		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            	}
                 pacmanVelocity = new Point2D(0,0);
+                
                
             }
             if (pacmanLocation.equals(ghost2Location)) {
-                gameOver = true;
+            	 LiveCount --;
+            	if (LiveCount == 0 ) {
+                    gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+                	}
+            	else {
+            		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            	}
                 pacmanVelocity = new Point2D(0,0);
+                LiveCount --;
                
             }
         }
@@ -472,11 +505,23 @@ public class PacManModel {
         }
         else {
             if (pacmanLocation.equals(ghost1Location)) {
-                gameOver = true;
+            	LiveCount --;
+            	if (LiveCount == 0 ) {
+                    gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+                	}
+            	else {
+            		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            	}
                 pacmanVelocity = new Point2D(0,0);
             }
             if (pacmanLocation.equals(ghost2Location)) {
-                gameOver = true;
+            	LiveCount --;
+            	if (LiveCount == 0 ) {
+                    gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+                	}
+            	else {
+            		startGame();   /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            	}
                 pacmanVelocity = new Point2D(0,0);
             }
         }
@@ -570,7 +615,15 @@ public class PacManModel {
         this.score = score;
     }
 
-    /** Add new points to the score
+    public int getLiveCount() {
+        return LiveCount;
+    }
+
+    public void getLiveCount(int LiveCount) {
+        this.LiveCount = LiveCount;
+    }
+     
+       /** Add new points to the score
      *
      * @param points
      */

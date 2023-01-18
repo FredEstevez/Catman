@@ -40,12 +40,9 @@ public class ControladorIni {
     @FXML
     private TextField TextJugador;
     
-
     @FXML
     private Button BotonJugar;
-
-    @SuppressWarnings("null")
-	@FXML
+       @FXML
     void EventoJugar(ActionEvent event) {
     	@SuppressWarnings("unused")
 		String texto = TextJugador.getText();	
@@ -65,6 +62,7 @@ public class ControladorIni {
     	        stage.initOwner(((Node)(event.getSource())).getScene().getWindow());
     	        stage.show();
     	        root.requestFocus();
+    	        
     			
     		} catch(Exception e) {
     			e.printStackTrace();
