@@ -23,6 +23,9 @@ public class PacManView extends Group {
     private Image bigDotImage;
     private Image smallDotImage;
 
+
+	
+
     /**
      * Initializes the values of the image instance variables from files
      */
@@ -39,9 +42,9 @@ public class PacManView extends Group {
         this.smallDotImage = new Image(getClass().getResourceAsStream("/res/smalldot.png"));
     }
 
-    /**
-     * Constructs an empty grid of ImageViews
-     */
+   
+    // se construye una cuadrícula vacía de ImageViews
+ 
     private void initializeGrid() {
         if (this.rowCount > 0 && this.columnCount > 0) {
             this.cellViews = new ImageView[this.rowCount][this.columnCount];
@@ -59,13 +62,11 @@ public class PacManView extends Group {
         }
     }
 
-    /** Updates the view to reflect the state of the model
-     *
-     * @param model
-     */
+   // Se actualiza la vista para reflejar el estado del modelo
+     
     public void update(PacManModel model) {
         assert model.getRowCount() == this.rowCount && model.getColumnCount() == this.columnCount;
-        //for each ImageView, set the image to correspond with the CellValue of that cell
+        //para cada ImageView, se configura la imagen para que se corresponda con el CellValue de esa celda
         for (int row = 0; row < this.rowCount; row++){
             for (int column = 0; column < this.columnCount; column++){
                 CellValue value = model.getCellValue(row, column);
@@ -81,7 +82,7 @@ public class PacManView extends Group {
                 else {
                     this.cellViews[row][column].setImage(null);
                 }
-                //check which direction PacMan is going in and display the corresponding image
+                //se comprueba en qué dirección va PacMan y muestra la imagen correspondiente
                 if (row == model.getPacmanLocation().getX() && column == model.getPacmanLocation().getY() && (PacManModel.getLastDirection() == PacManModel.Direction.RIGHT || PacManModel.getLastDirection() == PacManModel.Direction.NONE)) {
                     this.cellViews[row][column].setImage(this.pacmanRightImage);
                 }
@@ -94,7 +95,7 @@ public class PacManView extends Group {
                 else if (row == model.getPacmanLocation().getX() && column == model.getPacmanLocation().getY() && PacManModel.getLastDirection() == PacManModel.Direction.DOWN) {
                     this.cellViews[row][column].setImage(this.pacmanDownImage);
                 }
-                //make ghosts "blink" towards the end of ghostEatingMode (display regular ghost images on alternating updates of the counter)
+                //hacer que los fantasmas "parpadeen" hasta el final de ghostEatingMode (mostramos las imágenes de fantasmas regulares en actualizaciones alternas del contador)
                 if (PacManModel.isGhostEatingMode() && (Controller.getGhostEatingModeCounter() == 6 ||Controller.getGhostEatingModeCounter() == 4 || Controller.getGhostEatingModeCounter() == 2)) {
                     if (row == model.getGhost1Location().getX() && column == model.getGhost1Location().getY()) {
                         this.cellViews[row][column].setImage(this.ghost1Image);
@@ -103,7 +104,7 @@ public class PacManView extends Group {
                         this.cellViews[row][column].setImage(this.ghost2Image);
                     }
                 }
-                //display blue ghosts in ghostEatingMode
+                //se muestra los fantasmas azules en ghostEatingMode
                 else if (PacManModel.isGhostEatingMode()) {
                     if (row == model.getGhost1Location().getX() && column == model.getGhost1Location().getY()) {
                         this.cellViews[row][column].setImage(this.blueGhostImage);
@@ -112,7 +113,7 @@ public class PacManView extends Group {
                         this.cellViews[row][column].setImage(this.blueGhostImage);
                     }
                 }
-                //dispaly regular ghost images otherwise
+                //se muestra las imágenes de fantasma normales 
                 else {
                     if (row == model.getGhost1Location().getX() && column == model.getGhost1Location().getY()) {
                         this.cellViews[row][column].setImage(this.ghost1Image);
