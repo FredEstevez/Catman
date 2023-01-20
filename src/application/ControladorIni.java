@@ -43,7 +43,57 @@ public class ControladorIni {
     @FXML
     private Button BotonJugar;
        @FXML
-    void EventoJugar(ActionEvent event) {
+    // void EventoSiguiente(ActionEvent event) {
+    // 	@SuppressWarnings("unused")
+	// 	String texto = TextJugador.getText();	
+    // 	reproduce1.SonidoJugar();
+
+	// 	try {
+	// 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ranking.fxml"));
+	// 		Parent root = loader.load();
+	// 		Stage stage = new Stage();
+	// 		stage.setTitle("CatMan");
+	// 		Controller controller = loader.getController();
+	// 		root.setOnKeyPressed(controller);
+	// 		double sceneWidth = controller.getBoardWidth() + 20.0;
+	// 		double sceneHeight = controller.getBoardHeight() + 100.0;
+	// 		stage.setScene(new Scene(root, sceneWidth, sceneHeight));
+	// 		stage.initModality( Modality.WINDOW_MODAL);
+	// 		stage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+	// 		stage.show();
+	// 		root.requestFocus();
+			
+			
+	// 	} catch(Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+
+	// }
+    
+	// void EventoJugar(ActionEvent event){
+    // 		try {
+    // 			FXMLLoader loader = new FXMLLoader(getClass().getResource("pacman.fxml"));
+    // 	        Parent root = loader.load();
+    // 	        Stage stage = new Stage();
+	// 			stage.setTitle("CatMan");
+    // 	        Controller controller = loader.getController();
+    // 	        root.setOnKeyPressed(controller);
+    // 	        double sceneWidth = controller.getBoardWidth() + 20.0;
+    // 	        double sceneHeight = controller.getBoardHeight() + 100.0;
+    // 	        stage.setScene(new Scene(root, sceneWidth, sceneHeight));
+    // 	        stage.initModality( Modality.WINDOW_MODAL);
+    // 	        stage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+    // 	        stage.show();
+    // 	        root.requestFocus();
+    	        
+    			
+    // 		} catch(Exception e) {
+    // 			e.printStackTrace();
+    // 		}
+
+    // }
+
+	void EventoJugar(ActionEvent event) {
     	@SuppressWarnings("unused")
 		String texto = TextJugador.getText();	
     	reproduce1.SonidoJugar();
