@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.application.Platform;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -58,7 +59,7 @@ public class Controller implements EventHandler<KeyEvent> {
         this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
-  
+
      // Se carga el PacManModel, se actualiza la vista, actualiza la puntuación, las vidas y el nivel, muestra Game Over/You Won e instrucciones sobre cómo jugar
      // @param dirección la dirección ingresada más recientemente para que PacMan se mueva
  
