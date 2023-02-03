@@ -1,10 +1,8 @@
 package application;
 
 import javafx.geometry.Point2D;
-
 import javafx.fxml.FXML;
 import java.io.*;
-
 import java.util.*;
 
 public class PacManModel {
@@ -32,6 +30,7 @@ public class PacManModel {
     private Point2D ghost2Velocity;
     private static Direction lastDirection;
     private static Direction currentDirection;
+	public static int getScore;
 
 
     /**
@@ -470,9 +469,11 @@ public class PacManModel {
             	LiveCount --;
              	if (LiveCount > 0) {
             		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            		reproduce.SonidoMuere();
             	}
             	else {
             		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+            		 reproduce.SonidoMuere();
             	}
             //if (LiveCount == 0 ) {
             //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
@@ -488,9 +489,11 @@ public class PacManModel {
             	 LiveCount --;
             	 	if (LiveCount > 0) {
                 		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+                		reproduce.SonidoMuere();
                 	}
                 	else {
                 		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+                		 reproduce.SonidoMuere();
                 	}
                 //if (LiveCount == 0 ) {
                 //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
@@ -520,9 +523,11 @@ public class PacManModel {
             	LiveCount --;
             	if (LiveCount > 0) {
             		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            		reproduce.SonidoMuere();
             	}
             	else {
             		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+            		 reproduce.SonidoMuere();
             	}
             //if (LiveCount == 0 ) {
             //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
@@ -536,9 +541,11 @@ public class PacManModel {
             	LiveCount --;
              	if (LiveCount > 0) {
             		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            		reproduce.SonidoMuere();
             	}
             	else {
             		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
+            		 reproduce.SonidoMuere();
             	}
             //if (LiveCount == 0 ) {
             //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
@@ -632,7 +639,8 @@ public class PacManModel {
     }
 
     public int getScore() {
-        return score;
+    	getScore= score;
+        return getScore;
     }
 
     public void setScore(int score) {

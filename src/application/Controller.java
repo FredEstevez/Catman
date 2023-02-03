@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.application.Platform;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,27 +63,30 @@ public class Controller implements EventHandler<KeyEvent> {
      // @param dirección la dirección ingresada más recientemente para que PacMan se mueva
  
     private void update(PacManModel.Direction direction) {
-    	 libreriaAudio reproduce = new libreriaAudio();
+    	 libreriaAudio reproduce = new libreriaAudio(); //by Pacman Company
+         RankingDoc rankingDoc = new RankingDoc();
+    	 
         this.pacManModel.step(direction);
         this.pacManView.update(pacManModel);
        // this.scoreLabel.setText(String.format("Score: %d", this.pacManModel.getScore()));  
        // this.levelLabel.setText(String.format("Level: %d", this.pacManModel.getLevel()));
         this.scoreLabel.setText(String.format("Puntuación: %d", this.pacManModel.getScore()));  //by Pacman Company
         this.levelLabel.setText(String.format("Nivel: %d", this.pacManModel.getLevel()));  		//by Pacman Company
-        this.gameOverLabel.setText(String.format("Vidas: %d", this.pacManModel.getLiveCount()));    //by Pacman Company
-       // Image corazonImage = new Image(getClass().getResourceAsStream("/res/corazon.gif"));	// by Pacman Company
-       // ImageView imageView1 = new ImageView(corazonImage); 									// by Pacman Company // prueba con los corazones de vidas
-       // this.gameOverLabel.setGraphic(imageView1);     										// by Pacman Company
-        
+        this.gameOverLabel.setText(String.format("Vidas: %d", this.pacManModel.getLiveCount()));//by Pacman Company
         
         if (PacManModel.isGameOver()) {
-        	reproduce.SonidoMuere();
-        	this.gameOverLabel.setText(String.format("GAME OVER"));
-            pause();
+        	reproduce.SonidoMuere(); //by Pacman Company
+        	this.gameOverLabel.setText(String.format(" GAME OVER "));
+        	rankingDoc.EscribirRanking();//by Pacman Company - almacenamos el ranking consegido
+            rankingDoc.finjuego();// by Pacman Company - presentamos pantalla de ranking al finalizar partida
+        	pause();
+		
         }
         if (PacManModel.isYouWon()) {
           //  this.gameOverLabel.setText(String.format("YOU WON!"));
-        	this.gameOverLabel.setText(String.format("Enhorabuena, has Ganado!"));					// by Pacman Company
+        	this.gameOverLabel.setText(String.format(" Enhorabuena, has Ganado! "));			// by Pacman Company
+        	rankingDoc.EscribirRanking();														// by Pacman Company - almacenamos el ranking consegido
+            rankingDoc.finjuego(); 																// by Pacman Company - presentamos pantalla de ranking al finalizar partida
         	
         }
         //when PacMan is in ghostEatingMode, count down the ghostEatingModeCounter to reset ghostEatingMode to false when the counter is 0
