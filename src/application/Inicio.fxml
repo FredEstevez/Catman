@@ -59,6 +59,17 @@
                <font>
                   <Font name="System Italic" size="16.0" />
                </font></TextField>
+            <Button fx:id="BotonVerRanking" contentDisplay="CENTER" layoutX="444.0" layoutY="505.0" mnemonicParsing="false" onAction="#EventoVerRankig" prefHeight="49.0" prefWidth="221.0" style="-fx-background-color: #f5e109;" text="Ver Ranking" textFill="#0710f0">
+               <font>
+                  <Font name="Bauhaus 93" size="24.0" />
+               </font>
+               <effect>
+                  <Glow level="0.06" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
    </children>

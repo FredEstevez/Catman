@@ -14,7 +14,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Inicio.fxml"));
-			
 			ControladorIni control = new ControladorIni();
 			
 			loader.setController(control);
