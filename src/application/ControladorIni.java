@@ -42,6 +42,7 @@ libreriaAudio reproduce1 = new libreriaAudio();
     private TextField TextJugador;
     
     @FXML
+
     public Button BotonJugar;
     
 	@FXML
