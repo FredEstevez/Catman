@@ -15,10 +15,10 @@ public class PacManModel {
     @FXML private int rowCount;
     @FXML private int columnCount;
     private CellValue[][] grid;
-    private int score;
-    private int level;
+    private int score;// PUNTUACION
+    private int level;// NIVEL
     private int dotCount;
-    private int LiveCount;//vidas
+    private int LiveCount;//VIDAS
     private static boolean gameOver;
     private static boolean youWon;
     private static boolean ghostEatingMode;
@@ -33,10 +33,8 @@ public class PacManModel {
 	public static int getScore;
 
 
-    /**
-     * Start a new game upon initializion
-     */
-    public PacManModel() {
+    // COMENZAMOS NUEVA PARTIDA. INICIALIZANDO 
+     public PacManModel() {
         this.startNewGame();
     }
 
@@ -164,9 +162,9 @@ public class PacManModel {
 
     }
     // By Pacman Company -- Reinicio de partida tras perder una vida --fin
-    /** Initialize the level map for the next level
-     *
-     */
+ 
+    // Inicializamos el mapa de nivel para el proximo nivel
+     
     public void startNextLevel() {
         if (this.isLevelComplete()) {
             this.level++;
@@ -233,9 +231,9 @@ public class PacManModel {
         }
     }
 
-    /**
-     * Move ghosts to follow PacMan as established in moveAGhost() method
-     */
+   
+     // Mover fantasmas para seguir a PacMan como se establece en el método moveAGhost()
+    
     public void moveGhosts() {
         Point2D[] ghost1Data = moveAGhost(ghost1Velocity, ghost1Location);
         Point2D[] ghost2Data = moveAGhost(ghost2Velocity, ghost2Location);
@@ -397,9 +395,7 @@ public class PacManModel {
         }
     }
 
-    /**
-     * Resets ghost1's location and velocity to its home state
-     */
+    //devolvemos al fantasma1 a casa, reseteamos velocidad y posicion
     public void sendGhost1Home() {
         for (int row = 0; row < this.rowCount; row++) {
             for (int column = 0; column < this.columnCount; column++) {
@@ -411,9 +407,7 @@ public class PacManModel {
         ghost1Velocity = new Point2D(-1, 0);
     }
 
-    /**
-     * Resets ghost2's location and velocity to its home state
-     */
+    //devolvemos al fantasma2 a casa, reseteamos velocidad y posicion
     public void sendGhost2Home() {
         for (int row = 0; row < this.rowCount; row++) {
             for (int column = 0; column < this.columnCount; column++) {
@@ -432,8 +426,8 @@ public class PacManModel {
      */
     public void step(Direction direction) {
         this.movePacman(direction);
-   	 libreriaAudio reproduce = new libreriaAudio();
-        //if PacMan is on a small dot, delete small dot
+   	    libreriaAudio reproduce = new libreriaAudio();
+        //el PacMan ls quesitos pequeños, el punto pequeño se elimina
         CellValue pacmanLocationCellValue = grid[(int) pacmanLocation.getX()][(int) pacmanLocation.getY()];
         if (pacmanLocationCellValue == CellValue.SMALLDOT) {
             grid[(int) pacmanLocation.getX()][(int) pacmanLocation.getY()] = CellValue.EMPTY;
@@ -441,7 +435,7 @@ public class PacManModel {
             score += 10;
             reproduce.SonidoJugar();
         }
-        //if PacMan is on a big dot, delete big dot and change game state to ghost-eating mode and initialize the counter
+        //si pacman se come el queso grande, se borrar el queso, y el raton pasa a modo come-gatos
         if (pacmanLocationCellValue == CellValue.BIGDOT) {
             grid[(int) pacmanLocation.getX()][(int) pacmanLocation.getY()] = CellValue.EMPTY;
             dotCount--;
@@ -450,7 +444,8 @@ public class PacManModel {
             reproduce.SonidoSuperQueso();
             Controller.setGhostEatingModeCounter();
         }
-        //send ghost back to ghosthome if PacMan is on a ghost in ghost-eating mode
+        //enviamos el fantasma de regreso a casa,  si PacMan está en modo devorador de fantasmas y se come el fantasma
+        
         if (ghostEatingMode) {
             if (pacmanLocation.equals(ghost1Location)) {
                 sendGhost1Home();
@@ -465,25 +460,17 @@ public class PacManModel {
         }
         //Game Over, el raton es devorado por un gato
         else {
-            if (pacmanLocation.equals(ghost1Location)) {
+          if (pacmanLocation.equals(ghost1Location))  {
             	LiveCount --;
              	if (LiveCount > 0) {
-            		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
+            		startGame(); /// by Pacman Company  -se relanza la partida, mantiene los puntos, pero las vidas se van descontando (pierde 1 vida)
             		reproduce.SonidoMuere();
             	}
             	else {
             		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
             		 reproduce.SonidoMuere();
             	}
-            //if (LiveCount == 0 ) {
-            //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
-            //    	}
-            // 	else {
-            // 		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
-            // 	}
-                pacmanVelocity = new Point2D(0,0);
-                
-               
+                 pacmanVelocity = new Point2D(0,0);
             }
             if (pacmanLocation.equals(ghost2Location)) {
             	 LiveCount --;
@@ -495,31 +482,29 @@ public class PacManModel {
                 		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
                 		 reproduce.SonidoMuere();
                 	}
-                //if (LiveCount == 0 ) {
-                //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
-                //    	}
-                // 	else {
-                // 		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
-                // 	}
-                pacmanVelocity = new Point2D(0,0);
-                
-               
+                     pacmanVelocity = new Point2D(0,0);
             }
         }
+      
         //mover fantasmas y comprobar de nuevo si se comen fantasmas o PacMan (repetir estas comprobaciones ayuda a tener en cuenta los números pares/impares de cuadrados entre fantasmas y PacMan)
         this.moveGhosts();
         if (ghostEatingMode) {
             if (pacmanLocation.equals(ghost1Location)) {
                 sendGhost1Home();
                 score += 100;
-            }
+                reproduce.SonidoGatoAzul();
+        	}
+            
             if (pacmanLocation.equals(ghost2Location)) {
                 sendGhost2Home();
                 score += 100;
-            }
+                reproduce.SonidoGatoAzul();
+        	}
+            
         }
         else {
-            if (pacmanLocation.equals(ghost1Location)) {
+        	
+          if (pacmanLocation.equals(ghost1Location)) {
             	LiveCount --;
             	if (LiveCount > 0) {
             		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
@@ -529,13 +514,7 @@ public class PacManModel {
             		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
             		 reproduce.SonidoMuere();
             	}
-            //if (LiveCount == 0 ) {
-            //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
-            //    	}
-            // 	else {
-            // 		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
-            // 	}
-                pacmanVelocity = new Point2D(0,0);
+                 pacmanVelocity = new Point2D(0,0);
             }
             if (pacmanLocation.equals(ghost2Location)) {
             	LiveCount --;
@@ -547,12 +526,6 @@ public class PacManModel {
             		 gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
             		 reproduce.SonidoMuere();
             	}
-            //if (LiveCount == 0 ) {
-            //        gameOver = true; //by Pacman Company  - primero comprobamos cuantas vidas dispone
-            //    	}
-            // 	else {
-            // 		startGame(); /// by Pacman Company  -se relanza la partida, reinicia puntos, pero las vidas se conservan
-            // 	}
                 pacmanVelocity = new Point2D(0,0);
             }
         }
