@@ -6,6 +6,7 @@ import java.time.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -28,7 +29,7 @@ public void EscribirRanking()  {
 				archivo.createNewFile();
 				escribir = new FileWriter(archivo, true);
 				linea = new PrintWriter(escribir);
-				linea.println(PacManModel.getScore + " , "+ ControladorIni.getJugador() +" , " + LocalDateTime.now()); // By Pacman Company escribimos en el archivo
+				linea.println(PacManModel.getScore + "\t , \t"+ControladorIni.getJugador() + "\t , \t" + LocalDateTime.now()); // By Pacman Company escribimos en el archivo
 				linea.close();
 				escribir.close();
 			} catch (IOException e) {
@@ -41,7 +42,7 @@ public void EscribirRanking()  {
 		try {
 			escribir = new FileWriter(archivo, true);
 			linea = new PrintWriter(escribir);
-			linea.println(PacManModel.getScore + " , "+ControladorIni.getJugador() + " , " + LocalDateTime.now()); // By Pacman Company escribimos en el archivo
+			linea.println(PacManModel.getScore + "\t ,\t"+ControladorIni.getJugador() + "  \t ,\t" + LocalDateTime.now()); // By Pacman Company escribimos en el archivo
 			linea.close();
 			escribir.close();
 		} catch (IOException e2) {
@@ -57,9 +58,9 @@ public String leerRanking()  {
 	this.pacManModel = new PacManModel();
 	File archivo; 														// By Pacman Company - para manipular el archivo
 	FileReader leerArchivo;  											// By Pacman Company - para  en el archivo
-	archivo = new File("E:/Catman_fred/src/application/Ranking.txt"); 	// By Pacman Company - preparamos el archivo
+	archivo = new File("src/application/Ranking.txt"); 	// By Pacman Company - preparamos el archivo
 	int c;
-			String contenido = "Jugadores:";
+			String contenido = "Score   \t|\tJugador   \t|\tFecha\n";  //By Pacman Company - configuramos cabecera de la presentacion del txt - ranking
 			try {
 				leerArchivo = new FileReader(archivo);
 				
@@ -85,17 +86,19 @@ public String leerRanking()  {
 
 // By Pacman Company  Metodo - fin de juego, donde abro la pantalla de Ranking
 public void finjuego() {
- 		
+	        EscribirRanking(); //by Pacman Company - almacenamos el ranking consegido
     	try {
+    		
 			FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/application/RankingScreen.fxml"));
 			ControlRanking controlr = new ControlRanking();
 			loader1.setController(controlr);
 			Parent root = loader1.load();
 	        Stage stage1 = new Stage();
             stage1.setScene(new Scene(root));
-		    stage1.show();
+            stage1.initModality( Modality.WINDOW_MODAL);
+       	    stage1.show();
 		    
-		    controlr.startRank();
+		    controlr.startRank(); // By Pacman Company - leo el txt y lo presento en el objeto lista.
 		    
 
 		} catch(Exception e) {
