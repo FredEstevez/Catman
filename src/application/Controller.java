@@ -77,7 +77,7 @@ public class Controller implements EventHandler<KeyEvent> {
         if (PacManModel.isGameOver()) {
         	reproduce.SonidoMuere(); //by Pacman Company
         	this.gameOverLabel.setText(String.format(" GAME OVER "));
-        	rankingDoc.EscribirRanking();//by Pacman Company - almacenamos el ranking consegido
+        	//rankingDoc.EscribirRanking();//by Pacman Company - almacenamos el ranking consegido
             rankingDoc.finjuego();// by Pacman Company - presentamos pantalla de ranking al finalizar partida
         	pause();
 		
@@ -85,7 +85,7 @@ public class Controller implements EventHandler<KeyEvent> {
         if (PacManModel.isYouWon()) {
           //  this.gameOverLabel.setText(String.format("YOU WON!"));
         	this.gameOverLabel.setText(String.format(" Enhorabuena, has Ganado! "));			// by Pacman Company
-        	rankingDoc.EscribirRanking();														// by Pacman Company - almacenamos el ranking consegido
+        	//rankingDoc.EscribirRanking();														// by Pacman Company - almacenamos el ranking consegido
             rankingDoc.finjuego(); 																// by Pacman Company - presentamos pantalla de ranking al finalizar partida
         	
         }

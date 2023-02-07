@@ -42,7 +42,6 @@ libreriaAudio reproduce1 = new libreriaAudio();
     private TextField TextJugador;
     
     @FXML
-
     public Button BotonJugar;
     
 	@FXML
@@ -80,28 +79,28 @@ libreriaAudio reproduce1 = new libreriaAudio();
 	}
        
 	
-    @FXML
-    private Button BotonVerRanking;
+ //   @FXML
+ //   private Button BotonVerRanking;
 
 
-    @FXML
-    void EventoVerRankig(ActionEvent event) {
-    	try {
-			FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/application/RankingScreen.fxml"));
-			ControlRanking controlr = new ControlRanking();
-			loader1.setController(controlr);
-			Parent root = loader1.load();
-	        Stage stage1 = new Stage();
-            stage1.setScene(new Scene(root));
-		    stage1.show();
+ //   @FXML
+ //   void EventoVerRankig(ActionEvent event) {
+  //  	try {
+	//		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/application/RankingScreen.fxml"));
+	//		ControlRanking controlr = new ControlRanking();
+	//		loader1.setController(controlr);
+	//		Parent root = loader1.load();
+	//        Stage stage1 = new Stage();
+    //        stage1.setScene(new Scene(root));
+	//	    stage1.show();
 		    
-		    controlr.startRank();
+	//	    controlr.startRank();
 		    
 
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-    }
+	//	} catch(Exception e) {
+	//		e.printStackTrace();
+	//	}
+   // }
   
 	
   }
