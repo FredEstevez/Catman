@@ -17,8 +17,7 @@ public class Controller implements EventHandler<KeyEvent> {
     @FXML private Label gameOverLabel;
     @FXML private PacManView pacManView;
     private PacManModel pacManModel;
-    private static final String[] levelFiles = {"src/levels/level1.txt", "src/levels/level2.txt", "src/levels/level3.txt"};
-
+    private static final String[] levelFiles = {"src/levels/level1.txt", "src/levels/level2.txt", "src/levels/level3.txt", "src/levels/level4.txt","src/levels/level5.txt"};
     private Timer timer;
     private static int ghostEatingModeCounter;
     private boolean paused;
@@ -27,21 +26,22 @@ public class Controller implements EventHandler<KeyEvent> {
         this.paused = false;
     }
 
-    /**
-     * Initialize and update the model and view from the first txt file and starts the timer.
-     */
+   
+     //Se Inicializa y actualiza el modelo y la vista desde el primer archivo txt y se inicia el temporizador.
+   
     public void initialize() {
         @SuppressWarnings("unused")
 		String file = Controller.getLevelFile(0);
         this.pacManModel = new PacManModel();
         this.update(PacManModel.Direction.NONE);
         ghostEatingModeCounter = 25;
+        
         this.startTimer();
+        
     }
 
-    /**
-     * Schedules the model to update based on the timer.
-     */
+    // se programa el modelo para que se actualice según el temporizador.
+
     private void startTimer() {
         this.timer = new java.util.Timer();
         TimerTask timerTask = new TimerTask() {
@@ -58,26 +58,35 @@ public class Controller implements EventHandler<KeyEvent> {
         this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
-    /**
-     * Steps the PacManModel, updates the view, updates score and level, displays Game Over/You Won, and instructions of how to play
-     * @param direction the most recently inputted direction for PacMan to move in
-     */
+
+     // Se carga el PacManModel, se actualiza la vista, actualiza la puntuación, las vidas y el nivel, muestra Game Over/You Won e instrucciones sobre cómo jugar
+     // @param dirección la dirección ingresada más recientemente para que PacMan se mueva
+ 
     private void update(PacManModel.Direction direction) {
-    	 libreriaAudio reproduce = new libreriaAudio();
+    	 libreriaAudio reproduce = new libreriaAudio(); //by Pacman Company
+         RankingDoc rankingDoc = new RankingDoc();
+    	 
         this.pacManModel.step(direction);
         this.pacManView.update(pacManModel);
        // this.scoreLabel.setText(String.format("Score: %d", this.pacManModel.getScore()));  
        // this.levelLabel.setText(String.format("Level: %d", this.pacManModel.getLevel()));
-        this.scoreLabel.setText(String.format("Puntuación: %d", this.pacManModel.getScore()));  	//by Pacman Company
-        this.levelLabel.setText(String.format("Nivel: %d", this.pacManModel.getLevel()));  			//by Pacman Company
+        this.scoreLabel.setText(String.format("Puntuación: %d", this.pacManModel.getScore()));  //by Pacman Company
+        this.levelLabel.setText(String.format("Nivel: %d", this.pacManModel.getLevel()));  		//by Pacman Company
+        this.gameOverLabel.setText(String.format("Vidas: %d", this.pacManModel.getLiveCount()));//by Pacman Company
+        
         if (PacManModel.isGameOver()) {
-        	reproduce.SonidoMuere();
-        	this.gameOverLabel.setText(String.format("GAME OVER"));
-            pause();
+        	reproduce.SonidoMuere(); //by Pacman Company
+        	this.gameOverLabel.setText(String.format(" GAME OVER "));
+        	//rankingDoc.EscribirRanking();//by Pacman Company - almacenamos el ranking consegido
+            rankingDoc.finjuego();// by Pacman Company - presentamos pantalla de ranking al finalizar partida
+        	pause();
+		
         }
         if (PacManModel.isYouWon()) {
           //  this.gameOverLabel.setText(String.format("YOU WON!"));
-        	this.gameOverLabel.setText(String.format("Enhorabuena, has Ganado!"));					// by Pacman Company
+        	this.gameOverLabel.setText(String.format(" Enhorabuena, has Ganado! "));			// by Pacman Company
+        	//rankingDoc.EscribirRanking();														// by Pacman Company - almacenamos el ranking consegido
+            rankingDoc.finjuego(); 																// by Pacman Company - presentamos pantalla de ranking al finalizar partida
         	
         }
         //when PacMan is in ghostEatingMode, count down the ghostEatingModeCounter to reset ghostEatingMode to false when the counter is 0
@@ -121,9 +130,8 @@ public class Controller implements EventHandler<KeyEvent> {
         }
     }
 
-    /**
-     * Pause the timer
-     */
+   // Pausa el tiempo
+     
     public void pause() {
             this.timer.cancel();
             this.paused = true;
@@ -149,7 +157,7 @@ public class Controller implements EventHandler<KeyEvent> {
     {
         return levelFiles[x];
     }
-
+    
     public boolean getPaused() {
         return paused;
     }
