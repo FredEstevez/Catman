@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import application.PacManModel.CellValue;
 
 public class PacManView extends Group {
-    public final static double CELL_WIDTH = 35.0;
+    public final static double CELL_WIDTH = 25.0; // ajustar el tamaño de la ventana 
 
     @FXML private int rowCount;
     @FXML private int columnCount;
@@ -24,22 +24,18 @@ public class PacManView extends Group {
     private Image smallDotImage;
 
 
-	
-
-    /**
-     * Initializes the values of the image instance variables from files
-     */
+    //carga de imagenes del juego:
     public PacManView() {
-        this.pacmanRightImage = new Image(getClass().getResourceAsStream("/res/pacmanRight.gif"));
-        this.pacmanUpImage = new Image(getClass().getResourceAsStream("/res/pacmanUp.gif"));
-        this.pacmanDownImage = new Image(getClass().getResourceAsStream("/res/pacmanDown.gif"));
-        this.pacmanLeftImage = new Image(getClass().getResourceAsStream("/res/pacmanLeft.gif"));
-        this.ghost1Image = new Image(getClass().getResourceAsStream("/res/redghost.gif"));
-        this.ghost2Image = new Image(getClass().getResourceAsStream("/res/ghost2.gif"));
-        this.blueGhostImage = new Image(getClass().getResourceAsStream("/res/blueghost.gif"));
+        this.pacmanRightImage = new Image(getClass().getResourceAsStream("/res/raton-der.gif"));
+        this.pacmanUpImage = new Image(getClass().getResourceAsStream("/res/raton-arriba.gif"));
+        this.pacmanDownImage = new Image(getClass().getResourceAsStream("/res/raton-abajo.gif"));
+        this.pacmanLeftImage = new Image(getClass().getResourceAsStream("/res/raton-izq.gif"));
+        this.ghost1Image = new Image(getClass().getResourceAsStream("/res/gato1.png"));
+        this.ghost2Image = new Image(getClass().getResourceAsStream("/res/gato2.png"));
+        this.blueGhostImage = new Image(getClass().getResourceAsStream("/res/gatoAzul.png"));
         this.wallImage = new Image(getClass().getResourceAsStream("/res/wall.png"));
-        this.bigDotImage = new Image(getClass().getResourceAsStream("/res/whitedot.png"));
-        this.smallDotImage = new Image(getClass().getResourceAsStream("/res/smalldot.png"));
+        this.bigDotImage = new Image(getClass().getResourceAsStream("/res/superQueso.png"));
+        this.smallDotImage = new Image(getClass().getResourceAsStream("/res/miniQueso.png"));
     }
 
    
