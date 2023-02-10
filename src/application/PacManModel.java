@@ -38,13 +38,13 @@ public class PacManModel {
         this.startNewGame();
     }
 
-    /**
-     * Configure the grid CellValues based on the txt file and place PacMan and ghosts at their starting locations.
-     * "W" indicates a wall, "E" indicates an empty square, "B" indicates a big dot, "S" indicates
-     * a small dot, "1" or "2" indicates the ghosts home, and "P" indicates Pacman's starting position.
-     *
-     * @param fileName txt file containing the board configuration
-     */
+    /*Crear los tableros:
+     * Configure la cuadrícula CellValues ​​según el archivo txt y coloque PacMan y fantasmas en sus ubicaciones iniciales.
+      "W" indica una pared, "E" indica un cuadrado vacío, "B" indica un punto grande, "S" indica
+       un pequeño punto, "1" o "2" indica el hogar de los fantasmas, y "P" indica la posición inicial de Pacman.
+     
+     @param fileName archivo txt que contiene la configuración de la placa */
+     
     public void initializeLevel(String fileName) {
         File file = new File(fileName);
         Scanner scanner = null;
